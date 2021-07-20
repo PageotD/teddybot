@@ -7,6 +7,21 @@ client = discord.Client()
 
 client.countMsgTeddy = 0
 
+def teddy8ball(content):
+  """
+  8ball Teddy
+  """
+  BallChoice =[
+    "Essaye plus tard", "Essaye autre chose", "Pas d\'avis","C\'est ton destin", "Le sort en est jeté","Une chance sur deux", "D \'après moi oui","C'est certain", "Oui absolument", "Tu peux compter dessus","Sans aucun doute", "Très probable", "Oui", "C\'est bien parti", "C\'est non", "Peu probable", "Faut pas rêver", "N'y compte pas", "Impossible"
+  ]
+
+  seed = 0
+  for i in range(len(content)):
+    seed += ord(content[i])
+  
+  random.seed(a=seed)
+  return ":8ball: "+random.choice(BallChoice)+" !"
+
 def excuse_generator():
 
     accuse = ['JP', 'toi', 'un ornithorynque', '@Pierre-Yves','un chien', 'un chat', 'une théorie sur pythagore', 'une version de Windows', 'un iguane',
@@ -43,6 +58,10 @@ async def on_message(message):
   if message.content.startswith('!TeddyBot'):
     excuse = excuse_generator()
     await message.reply(excuse, mention_author=True)
+
+  elif message.content.startswith('!Teddy8Ball'):
+    reponse = teddy8ball(message.content)
+    await message.reply(reponse, mention_author=True)
 
   elif(client.countMsgTeddy > 15 and random.random() > 0.50):
     client.countMsgTeddy = 0
