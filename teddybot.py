@@ -2,6 +2,8 @@ import os
 import discord
 
 import random
+from dotenv import load_dotenv
+load_dotenv()
 
 client = discord.Client()
 
@@ -12,8 +14,9 @@ from teddyActions import shifumi, heightball, excuse_generator
 
 @client.event
 async def on_ready():
-    print('We have logged in as {0.user}'.format(client))
-    #await channel.send("Pour m'invoquer, un simple `!TeddyBot` en début de message suffit!")
+    print('-------------------- START-UP --------------------')
+    print('* We have logged in as {0.user}'.format(client))
+    print('--------------------------------------------------')
  
 @client.event
 async def on_message(message):
@@ -23,11 +26,7 @@ async def on_message(message):
   if message.author.id == client.user.id:
     return
 
-  if message.content.startswith('!TeddyBot'):
-    excuse = excuse_generator()
-    await message.reply(excuse, mention_author=True)
-
-  elif "!TeddyBot" in message.content.split():
+  if "!TeddyBot" in message.content.split():
     excuse = excuse_generator()
     await message.reply(excuse, mention_author=True)
 
@@ -38,7 +37,12 @@ async def on_message(message):
   elif message.content.startswith('!TeddyShifumi'):
     reponse = shifumi(message)
     if reponse == -1:
-      await message.reply("J'ai pas compris!", mention_author=True)
+      retour = [
+        "J\'ai pas compris!",
+        "T\'as le choix entre 3 mots, c'est quoi le problème ?",
+        "Tu sais pas écrire sérieux ?"
+        ]
+      await message.reply(random.choice(retour), mention_author=True)
     else:
       await message.reply(reponse, mention_author=True)
 
@@ -52,5 +56,4 @@ async def on_message(message):
     await message.channel.send(random.choice(replies))
 
 
-#client.run(os.environ['TOKEN'])
-client.run("ODY2NjY0NzE0NjE1MTI4MDY0.YPV2aQ.Olg-F5XWoimguOqw1-NPX79f1Xs")
+client.run(os.environget("TOKEN"))
