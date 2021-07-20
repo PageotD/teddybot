@@ -34,8 +34,8 @@ async def on_message(message):
     await message.reply(excuse, mention_author=True)
 
   elif message.content.startswith('!Teddy8Ball'):
-    reponse = heightball(message.content)
-    await message.reply(reponse, mention_author=True)
+    answer = heightball(message)
+    await message.reply(answer, mention_author=True)
 
   elif message.content.startswith('!TeddyShifumi'):
     reponse = shifumi(message)

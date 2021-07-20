@@ -18,20 +18,31 @@ def excuse_generator():
         )
     return " ".join(replyTuple)
 
-def heightball(content):
-  """
-  8ball Teddy
-  """
-  BallChoice =[
-    "Essaye plus tard", "Essaye autre chose", "Pas d\'avis","C\'est ton destin", "Le sort en est jeté","Une chance sur deux", "D \'après moi oui","C'est certain", "Oui absolument", "Tu peux compter dessus","Sans aucun doute", "Très probable", "Oui", "C\'est bien parti", "C\'est non", "Peu probable", "Faut pas rêver", "N'y compte pas", "Impossible"
-  ]
+def heightball(message):
+    """
+    Magic 8-ball is supposed to predict the future and answer any question asked.
 
-  seed = 0
-  for i in range(len(content)):
-    seed += ord(content[i])
-  
-  random.seed(a=seed)
-  return ":8ball: "+random.choice(BallChoice)+" !"
+    :param message: class discord.Message
+    :return: string
+    """
+
+    # Magic 8-Ball avalaible answers
+    answers = [
+        "Essaye plus tard", "Essaye autre chose", "Pas d'avis", "C'est ton destin", "Le sort en est jeté",
+        "Une chance sur deux", "D'après moi oui", "C'est certain", "Oui absolument", "Tu peux compter dessus",
+        "Sans aucun doute", "Très probable", "Oui", "C'est bien parti", "C'est non", "Peu probable", "Faut pas rêver",
+        "N'y compte pas", "Impossible"
+    ]
+
+    # Check the message content
+    msg = message.content.split()
+    if len(msg) > 1:
+        # Message has a content (other than command !Teddy8Ball
+        # Randomly selects an answer and returns the reply.
+        return ":8ball: "+random.choice(answers)+"!"
+    else:
+        # Message does not have any content (other than command !Teddy8Ball
+        return "Tu dois poser une question!"
 
 def shifumi(message):
   shifumimoji = {'pierre': ':rock: ', 'feuille': ':leaves: ', 'ciseaux':':scissors: '}
