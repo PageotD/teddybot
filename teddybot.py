@@ -1,6 +1,7 @@
 import os
 import discord
 
+from datetime import datetime
 import random
 from dotenv import load_dotenv
 load_dotenv()
@@ -13,7 +14,11 @@ client.countMsgTeddy = 0
 
 @client.event
 async def on_ready():
-    print('We have logged in as {0.user}'.format(client))
+    print("------------------------- START UP -------------------------")
+    print(" * date: {}".format(datetime.now()))
+    print(" * discord.py version: {}".format(discord.__version__))
+    print(' * logged in as {0.user}'.format(client))
+    print("------------------------------------------------------------")
     #await channel.send("Pour m'invoquer, un simple `!TeddyBot` en début de message suffit!")
 
 @client.event
@@ -25,6 +30,7 @@ async def on_message(message):
 
   if message.content.startswith('!TeddyBot'):
     excuse = excuse_generator()
+    print(message.author, message.author.name, message.author.id)
     await message.reply(excuse, mention_author=True)
 
   elif message.content.startswith('!Teddy8Ball'):
@@ -43,6 +49,5 @@ async def on_message(message):
       'Je vais dire à JP que vous glandez sur Discord! :scream:'
     ]
     await message.channel.send(random.choice(replies))
-
 
 client.run(os.environ.get("TOKEN"))
