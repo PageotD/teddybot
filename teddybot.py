@@ -14,12 +14,21 @@ client.countMsgTeddy = 0
 
 @client.event
 async def on_ready():
+    """
+    discord.on_ready()
+    Called when the client is done preparing the data received from Discord. Usually
+    after login is successful and the Client.guilds and co. are filled up.
+    """
     print("------------------------- START UP -------------------------")
     print(" * date: {}".format(datetime.now()))
     print(" * discord.py version: {}".format(discord.__version__))
-    print(' * logged in as {0.user}'.format(client))
     print("------------------------------------------------------------")
-    #await channel.send("Pour m'invoquer, un simple `!TeddyBot` en début de message suffit!")
+    print(" * logged in as {0.user}:".format(client))
+    for guild in client.guilds:
+      print("   * {} ({} members)".format(
+          guild.name,
+          guild.member_count))
+    print("------------------------------------------------------------")
 
 @client.event
 async def on_message(message):
