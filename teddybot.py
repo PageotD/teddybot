@@ -6,7 +6,7 @@ import random
 from dotenv import load_dotenv
 load_dotenv()
 
-from teddyActions import excuse_generator, heightball, shifumi
+from teddyActions import excuse_generator, heightball, shifumi, teddyvd_generator
 
 client = discord.Client()
 
@@ -28,20 +28,24 @@ async def on_message(message):
   if message.author.id == client.user.id:
     return
 
-  if message.content.startswith('!TeddyBot'):
+  if message.content.lower().startswith('!teddybot'):
     excuse = excuse_generator()
     print(message.author, message.author.name, message.author.id)
     await message.reply(excuse, mention_author=True)
 
-  elif message.content.startswith('!Teddy8Ball'):
+  elif message.content.lower().startswith('!teddy8ball'):
     answer = heightball(message)
     await message.reply(answer, mention_author=True)
 
-  elif message.content.startswith('!TeddyShifumi'):
+  elif message.content.lower().startswith('!teddyvd'):
+    reponse = teddyvd_generator()
+    await message.reply(reponse)
+
+  elif message.content.lower().startswith('!teddyshifumi'):
     reponse = shifumi(message)
     await message.reply(reponse, mention_author=True)
 
-  elif(client.countMsgTeddy > 15 and random.random() > 0.50):
+  elif(client.countMsgTeddy > 25 and random.random() > 0.50):
     client.countMsgTeddy = 0
     replies = [
       'Vous feriez mieux de lire le wiki au lieu de papoter! :face_with_monocle:',

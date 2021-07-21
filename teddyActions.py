@@ -3,6 +3,22 @@ import discord
 import random
 import yaml
 
+def teddyvd_generator():
+    teddyvd1 = yaml.load(open("teddyvd1.yaml", 'r', encoding="utf-8"), Loader=yaml.FullLoader)
+    teddyvd2 = yaml.load(open("teddyvd2.yaml", 'r', encoding="utf-8"), Loader=yaml.FullLoader)
+    teddyvd3 = yaml.load(open("teddyvd3.yaml", 'r', encoding="utf-8"), Loader=yaml.FullLoader)
+    teddyvd4 = yaml.load(open("teddyvd4.yaml", 'r', encoding="utf-8"), Loader=yaml.FullLoader)
+    # Join strings to create the reply
+    replyTuple = (
+        random.choice(teddyvd1),
+        random.choice(teddyvd2),
+        "car",
+        random.choice(teddyvd3),
+        random.choice(teddyvd4),
+        "_-Teddy Van Damme_."
+    )
+    return " ".join(replyTuple)
+
 def excuse_generator():
     accuse = yaml.load(open("accuse.yaml", 'r', encoding="utf-8"), Loader=yaml.FullLoader)
     commettre = yaml.load(open("commettre.yaml", 'r', encoding="utf-8"), Loader=yaml.FullLoader)
