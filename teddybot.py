@@ -45,7 +45,7 @@ async def on_message(message):
     reponse = shifumi(message)
     await message.reply(reponse, mention_author=True)
 
-  elif(client.countMsgTeddy > 25 and random.random() > 0.50):
+  elif(client.countMsgTeddy > 25 and random.random() > 0.95):
     client.countMsgTeddy = 0
     replies = [
       'Vous feriez mieux de lire le wiki au lieu de papoter! :face_with_monocle:',
