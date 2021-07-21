@@ -9,13 +9,13 @@ def teddyvd_generator():
     teddyvd3 = yaml.load(open("teddyvd3.yaml", 'r', encoding="utf-8"), Loader=yaml.FullLoader)
     teddyvd4 = yaml.load(open("teddyvd4.yaml", 'r', encoding="utf-8"), Loader=yaml.FullLoader)
     # Join strings to create the reply
-    replyTuple = (
+    replyTuple = (">>>",
         random.choice(teddyvd1),
         random.choice(teddyvd2),
         "car",
         random.choice(teddyvd3),
         random.choice(teddyvd4),
-        "_-Teddy Van Damme_."
+        "\n_-Teddy Van Damme_."
     )
     return " ".join(replyTuple)
 

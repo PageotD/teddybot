@@ -39,7 +39,7 @@ async def on_message(message):
 
   elif message.content.lower().startswith('!teddyvd'):
     reponse = teddyvd_generator()
-    await message.reply(reponse)
+    await message.channel.send(reponse)
 
   elif message.content.lower().startswith('!teddyshifumi'):
     reponse = shifumi(message)
