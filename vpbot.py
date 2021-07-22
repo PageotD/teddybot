@@ -1,4 +1,5 @@
 # Import modules
+import random
 import yaml
 
 class VPBot:
@@ -70,9 +71,6 @@ class VPBot:
         pass
 
     def play(self):
-        pass
-
-    def feed(self):
         pass
 
     # Actions
