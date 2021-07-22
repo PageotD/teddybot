@@ -2,15 +2,18 @@ import os
 import discord
 
 from datetime import datetime
+import time
 import random
 from dotenv import load_dotenv
 load_dotenv()
 
-from teddyActions import excuse_generator, heightball, shifumi, teddyvd_generator
+from teddyActions import excuse_generator, heightball, shifumi, teddyvd_generator, teddygotchi
 
 client = discord.Client()
 
 client.countMsgTeddy = 0
+client.hungrylvl = 100.
+client.eattime = time.time()
 
 @client.event
 async def on_ready():
@@ -54,6 +57,10 @@ async def on_message(message):
     reponse = shifumi(message)
     await message.reply(reponse, mention_author=True)
 
+  elif message.content.lower().startswith('!teddygotchi'):
+    reponse = teddygotchi(message, client.hungrylvl, client.eattime)
+    await message.reply(reponse, mention_author=True)
+
   elif(client.countMsgTeddy > 25 and random.random() > 0.95):
     client.countMsgTeddy = 0
     replies = [
@@ -62,5 +69,6 @@ async def on_message(message):
       'Je vais dire à JP que vous glandez sur Discord! :scream:'
     ]
     await message.channel.send(random.choice(replies))
+
 
 client.run(os.environ.get("TOKEN"))
