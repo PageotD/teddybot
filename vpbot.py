@@ -74,3 +74,34 @@ class VPBot:
 
     def feed(self):
         pass
+
+    # Actions
+    def jcvd_generator(self):
+        """
+        Randomly generate JCVD sentences.
+        """
+
+        with open("resources/jcvdgen01.yaml", 'r', encoding="utf-8") as fyaml:
+            part01 = yaml.load(fyaml, Loader=yaml.FullLoader)
+
+        with open("resources/jcvdgen02.yaml", 'r', encoding="utf-8") as fyaml:
+            part02 = yaml.load(fyaml, Loader=yaml.FullLoader)
+
+        with open("resources/jcvdgen03.yaml", 'r', encoding="utf-8") as fyaml:
+            part03 = yaml.load(fyaml, Loader=yaml.FullLoader)
+
+        with open("resources/jcvdgen04.yaml", 'r', encoding="utf-8") as fyaml:
+            part04 = yaml.load(fyaml, Loader=yaml.FullLoader)
+
+        # Join strings to create the reply
+        replyTuple = (
+            ">>>",
+            random.choice(part01),
+            random.choice(part02),
+            "car",
+            random.choice(part03),
+            random.choice(part04),
+            "\n_-Teddy Van Damme_."
+            )
+
+        return " ".join(replyTuple)
