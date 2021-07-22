@@ -71,4 +71,29 @@ async def on_message(message):
     await message.channel.send(random.choice(replies))
 
 
+  elif message.content.lower().startswith('!teddystatus'): #message.content == "=displayembed":
+      status_description = ":small_blue_diamond: discord.py version: "+str(discord.__version__)+"\n"
+      status_description += ":small_blue_diamond: Guild(s):\n"
+      print(" * logged in as {0.user}:".format(client))
+      for guild in client.guilds:
+          status_description += "    - "+str(guild.name)+" :white_check_mark:\n"
+      embed = discord.Embed(
+          title="Teddy Bot Status",
+          description=status_description,
+          colour=discord.Colour.blue()
+      )
+
+      embed.set_footer(text="Developing Evoli Tamagotchi...")
+      #embed.set_image(url="https://cdn.discordapp.com/attachments/520265639680671747/533389224913797122/rtgang.jpeg")
+      embed.set_thumbnail(url="https://img1.freepng.fr/20190207/grw/kisspng-eevee-pixel-art-image-eevee-pixel-art-maker-5c5ce3d3859cc0.9955544915495915075473.jpg")
+          #url="https://cdn.discordapp.com/app-icons/866664714615128064/1800f16c3114e8a385585c1eb06e13fa.png?size=64")
+          #url="https://64.media.tumblr.com/18a645e8cae6526b567b17919ea65d54/tumblr_n49u4s74II1skxu51o1_500.gifv")
+      #embed.set_author(name="Teddy Bot v0.3",
+      #                 icon_url="https://cdn.discordapp.com/app-icons/866664714615128064/1800f16c3114e8a385585c1eb06e13fa.png?size=64")
+      #embed.add_field(name="Field Name", value="Field Value", inline=False)
+      #embed.add_field(name="Field Name", value="Field Value", inline=True)
+      #embed.add_field(name="Field Name", value="Field Value", inline=True)
+
+      await message.channel.send(embed=embed)
+
 client.run(os.environ.get("TOKEN"))

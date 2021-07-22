@@ -47,7 +47,7 @@ def teddygotchi(message, hungrylvl, eattime):
     food = [
         ":apple:", ":red_apple:", ":green_apple:", ":pear:", ":tangerine:", ":lemon:", ":banana:", ":watermelon:",
         ":grapes:", ":blueberries:", ":strawberry:", ":melon:", ":cherries:", ":peach:", ":mango:",
-        ":pineapple:", ":coconut:", ":beer_mug:"
+        ":pineapple:", ":coconut:", ":beer_mug:", ":pizza:", ":pretzel:"
     ]
     # Check the message content
 
@@ -61,12 +61,21 @@ def teddygotchi(message, hungrylvl, eattime):
             eattime = time.time()
             reply=">>> Teddy aime bien {} !".format(msg[1])
         else:
-            reply = ">>> Teddy n'aime pas {} !".format(msg[1])
+            reptype = random.random()
+            if(reptype < 0.2):
+                reply = ">>> Teddy n'aime pas {} !".format(msg[1])
+            elif reptype >= 0.2:
+                zone=[
+                    "dans la tête !",
+                    "dans les genoux !",
+                    "dans les dents !"
+                ]
+                reply = ">>> Teddy te renvoie {} {} !".format(msg[1], random.choice(zone))
     else:
         if hungrylvl <= 5.:
             reply = ">>> Teddy n'a pas faim."
         elif hungrylvl > 5. and hungrylvl <= 25:
-            reply = ">>> Teddy commence a un peu faim."
+            reply = ">>> Teddy a un peu faim."
         elif hungrylvl > 25. and hungrylvl <= 50:
             reply = ">>> Teddy commence à avoir faim."
         elif hungrylvl > 50. and hungrylvl <= 75:
