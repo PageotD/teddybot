@@ -7,7 +7,7 @@ import random
 from dotenv import load_dotenv
 load_dotenv()
 
-from teddyActions import excuse_generator, heightball, shifumi, teddyvd_generator, teddygotchi
+from teddyActions import excuse_generator, heightball, shifumi, teddyvd_generator, teddygotchi, cbait_generator
 
 client = discord.Client()
 
@@ -42,6 +42,11 @@ async def on_message(message):
 
   if message.content.lower().startswith('!teddybot'):
     excuse = excuse_generator()
+    print(message.author, message.author.name, message.author.id)
+    await message.reply(excuse, mention_author=True)
+
+  if message.content.lower().startswith('!teddybait'):
+    excuse = cbait_generator()
     print(message.author, message.author.name, message.author.id)
     await message.reply(excuse, mention_author=True)
 

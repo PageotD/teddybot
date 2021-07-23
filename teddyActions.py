@@ -6,6 +6,25 @@ import yaml
 import time
 from emoji import UNICODE_EMOJI, demojize
 
+def cbait_generator():
+    cperson = yaml.load(open("cperson.yaml", 'r', encoding="utf-8"), Loader=yaml.FullLoader)
+    cobject = yaml.load(open("cobject.yaml", 'r', encoding="utf-8"), Loader=yaml.FullLoader)
+    caction = yaml.load(open("caction.yaml", 'r', encoding="utf-8"), Loader=yaml.FullLoader)
+    cfinal = yaml.load(open("cfinal.yaml", 'r', encoding="utf-8"), Loader=yaml.FullLoader)
+
+    if(random.random() > 0.5):
+        # Template 1
+        person1 = random.choice(cperson)
+        person2 = random.choice(cperson)
+        final1 = random.choice(cfinal)
+        reply = ">>> "+person1+" rencontre "+person2+"! "+final1
+    else:
+        #Template 2
+        action1 = random.choice(cfinal)
+        object1 = random.choice(cobject)
+        final1 = random.choice(cfinal)
+        reply = ">>> Je "+action1+" "+object1+"! "+final1
+
 def teddyvd_generator():
     teddyvd1 = yaml.load(open("teddyvd1.yaml", 'r', encoding="utf-8"), Loader=yaml.FullLoader)
     teddyvd2 = yaml.load(open("teddyvd2.yaml", 'r', encoding="utf-8"), Loader=yaml.FullLoader)
