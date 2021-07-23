@@ -20,10 +20,11 @@ def cbait_generator():
         reply = ">>> "+person1+" rencontre "+person2+"! "+final1
     else:
         #Template 2
-        action1 = random.choice(cfinal)
+        action1 = random.choice(caction)
         object1 = random.choice(cobject)
         final1 = random.choice(cfinal)
         reply = ">>> Je "+action1+" "+object1+"! "+final1
+    return reply
 
 def teddyvd_generator():
     teddyvd1 = yaml.load(open("teddyvd1.yaml", 'r', encoding="utf-8"), Loader=yaml.FullLoader)
