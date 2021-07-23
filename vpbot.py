@@ -1,7 +1,6 @@
 # Import modules
 import random
 import yaml
-import urllib
 
 class VPBot:
     """
@@ -198,6 +197,10 @@ class VPBot:
                 final1 = "C'est pas faux!"
             if person2 == "Provençal le Gaulois":
                 final1 = "Il en a gros!"
+            if person1 == "Merlin" or person2 == "Merlin":
+                final1 = "Il manque pas de toupet!"
+            if person1 == "Leodagan" or person2 == "Leodagan":
+                final1 = "Il lui dit merde!"
             reply = ">>> " + person1 + " rencontre " + person2 + "! " + final1
         else:
             # Template 2

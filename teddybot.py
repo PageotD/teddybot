@@ -48,32 +48,32 @@ async def on_message(message):
     return
 
   # Random excuse generator
-  if message.content.lower().startswith('!#teddybot'):
+  if message.content.lower().startswith('!teddybot'):
     await message.reply(client.vpbot.excuse_generator(), mention_author=True)
 
   # Magic 8-Ball
-  elif message.content.lower().startswith('!#teddy8ball'):
+  elif message.content.lower().startswith('!teddy8ball'):
     await message.reply(client.vpbot.heightball(message), mention_author=True)
 
   # Random JCVD sentence generator
-  elif message.content.lower().startswith('!#teddyvd'):
+  elif message.content.lower().startswith('!teddyvd'):
     await message.channel.send(client.vpbot.jcvd_generator())
 
   # Random clickbait generator
-  elif message.content.lower().startswith('!#teddybait'):
+  elif message.content.lower().startswith('!teddybait'):
     print(message.guild)
     await message.channel.send(client.vpbot.cbait_generator(message))
 
   # Play Shifumi with the vpbot
-  elif message.content.lower().startswith('!#teddyshifumi'):
+  elif message.content.lower().startswith('!teddyshifumi'):
     await message.reply(client.vpbot.play_shifumi(message) , mention_author=True)
 
   # Virtual pet behavior and stats
-  elif message.content.lower().startswith('!#teddygotchi'):
+  elif message.content.lower().startswith('!teddygotchi'):
     reponse = teddygotchi(message, client.hungrylvl, client.eattime)
     await message.reply(reponse, mention_author=True)
 
-  elif message.content.lower().startswith('!#teddystatus'): #message.content == "=displayembed":
+  elif message.content.lower().startswith('!teddystatus'): #message.content == "=displayembed":
       status_description = ":small_blue_diamond: discord.py version: "+str(discord.__version__)+"\n"
       status_description += ":small_blue_diamond: Guild(s):\n"
       print(" * logged in as {0.user}:".format(client))
@@ -98,4 +98,4 @@ async def on_message(message):
 
       await message.channel.send(embed=embed)
 
-client.run(os.environ.get("TOKENDEV"))
+client.run(os.environ.get("TOKEN"))
