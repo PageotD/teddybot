@@ -15,7 +15,6 @@ from vpbot import VPBot
 
 client = discord.Client()
 
-client.countMsgTeddy = 0
 client.hungrylvl = 100.
 client.eattime = time.time()
 
@@ -43,7 +42,7 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-  client.countMsgTeddy += 1
+
   # we do not want the bot to reply to itself
   if message.author.id == client.user.id:
     return
@@ -62,7 +61,8 @@ async def on_message(message):
 
   # Random clickbait generator
   elif message.content.lower().startswith('!#teddybait'):
-    await message.channel.send(client.vpbot.cbait_generator())
+    print(message.guild)
+    await message.channel.send(client.vpbot.cbait_generator(message))
 
   # Play Shifumi with the vpbot
   elif message.content.lower().startswith('!#teddyshifumi'):
@@ -72,16 +72,6 @@ async def on_message(message):
   elif message.content.lower().startswith('!#teddygotchi'):
     reponse = teddygotchi(message, client.hungrylvl, client.eattime)
     await message.reply(reponse, mention_author=True)
-
-  elif(client.countMsgTeddy > 25 and random.random() > 0.95):
-    client.countMsgTeddy = 0
-    replies = [
-      'Vous feriez mieux de lire le wiki au lieu de papoter! :face_with_monocle:',
-      'Concentrez-vous! :confused:',
-      'Je vais dire à JP que vous glandez sur Discord! :scream:'
-    ]
-    await message.channel.send(random.choice(replies))
-
 
   elif message.content.lower().startswith('!#teddystatus'): #message.content == "=displayembed":
       status_description = ":small_blue_diamond: discord.py version: "+str(discord.__version__)+"\n"

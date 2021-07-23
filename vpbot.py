@@ -172,17 +172,32 @@ class VPBot:
             # Message does not have any content (other than command !Teddy8Ball
             return "Tu dois poser une question!"
 
-    def cbait_generator(self):
+    def cbait_generator(self, message):
         cperson = yaml.load(open("resources/cbait_person.yaml", 'r', encoding="utf-8"), Loader=yaml.FullLoader)
         cobject = yaml.load(open("resources/cbait_object.yaml", 'r', encoding="utf-8"), Loader=yaml.FullLoader)
         caction = yaml.load(open("resources/cbait_action.yaml", 'r', encoding="utf-8"), Loader=yaml.FullLoader)
         cfinal = yaml.load(open("resources/cbait_final.yaml", 'r', encoding="utf-8"), Loader=yaml.FullLoader)
 
-        if (random.random() > 0.75):
+        if (random.random() > 0.6):
             # Template 1
             person1 = random.choice(cperson)
             person2 = random.choice(cperson)
+            while(person1 == person2):
+                person1 = random.choice(cperson)
+                person2 = random.choice(cperson)
+            if person1 == "GuildMember":
+                person1 = message.author.mention
+            if person2 == "GuildMember":
+                person2 = message.author.mention
             final1 = random.choice(cfinal)
+            if person1 == "le Roi des burgondes":
+                final1 = "Interprètre! Cuillère!"
+            if person2 == "le Roi des burgondes":
+                final1 = "Salsifi!"
+            if person1 == "Provençal le Gaulois":
+                final1 = "C'est pas faux!"
+            if person2 == "Provençal le Gaulois":
+                final1 = "Il en a gros!"
             reply = ">>> " + person1 + " rencontre " + person2 + "! " + final1
         else:
             # Template 2
