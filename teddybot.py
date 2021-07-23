@@ -8,7 +8,7 @@ import random
 from dotenv import load_dotenv
 load_dotenv()
 
-from teddyActions import shifumi, teddygotchi
+from teddyActions import teddygotchi
 
 from vpbot import VPBot
 
@@ -48,19 +48,23 @@ async def on_message(message):
   if message.author.id == client.user.id:
     return
 
+  # Random excuse generator
   if message.content.lower().startswith('!#teddybot'):
     await message.reply(client.vpbot.excuse_generator(), mention_author=True)
 
+  # Magic 8-Ball
   elif message.content.lower().startswith('!#teddy8ball'):
     await message.reply(client.vpbot.heightball(message), mention_author=True)
 
+  # Random JCVD sentence generator
   elif message.content.lower().startswith('!#teddyvd'):
     await message.channel.send(client.vpbot.jcvd_generator())
 
+  # Play Shifumi with the vpbot
   elif message.content.lower().startswith('!#teddyshifumi'):
-    reponse = shifumi(message)
-    await message.reply(reponse, mention_author=True)
+    await message.reply(client.vpbot.play_shifumi(message) , mention_author=True)
 
+  # Virtual pet behavior and stats
   elif message.content.lower().startswith('!#teddygotchi'):
     reponse = teddygotchi(message, client.hungrylvl, client.eattime)
     await message.reply(reponse, mention_author=True)

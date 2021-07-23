@@ -54,15 +54,3 @@ def teddygotchi(message, hungrylvl, eattime):
             reply = ">>> Teddy a grave la dalle ! Faut le nourrir là !"
 
     return reply
-
-def shifumi(message):
-  shifumimoji = {'pierre': ':rock: ', 'feuille': ':leaves: ', 'ciseaux':':scissors: '}
-  try:
-    play = message.content.split()
-    play_stat = play[1].lower()
-    if(play_stat in ['pierre', 'feuille', 'ciseaux']):
-      player_return = shifumimoji[play_stat]+play_stat
-      shifumi = [':rock: pierre', ':leaves: feuille', ':scissors: ciseaux']
-    return player_return+" **vs** "+random.choice(shifumi)
-  except:
-    return -1

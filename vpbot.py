@@ -78,6 +78,20 @@ class VPBot:
     def play(self):
         pass
 
+    def play_shifumi(self, message):
+        shifumimoji = {'pierre': ':rock: ', 'feuille': ':leaves: ', 'ciseaux': ':scissors: '}
+        try:
+            play = message.content.split()
+            play_stat = play[1].lower()
+            if (play_stat in ['pierre', 'feuille', 'ciseaux']):
+                player_return = shifumimoji[play_stat] + play_stat
+                shifumi = [':rock: pierre', ':leaves: feuille', ':scissors: ciseaux']
+                # Update happiness
+                self._modify_happiness(inc=10.)
+            return player_return + " **vs** " + random.choice(shifumi)
+        except:
+            return ">>> pierre :rock:, feuille :leaves:, ciseaux :scissors:."
+
     # Actions
     def excuse_generator(self):
 
