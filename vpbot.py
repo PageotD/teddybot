@@ -171,3 +171,23 @@ class VPBot:
         else:
             # Message does not have any content (other than command !Teddy8Ball
             return "Tu dois poser une question!"
+
+    def cbait_generator(self):
+        cperson = yaml.load(open("resources/cbait_person.yaml", 'r', encoding="utf-8"), Loader=yaml.FullLoader)
+        cobject = yaml.load(open("resources/cbait_object.yaml", 'r', encoding="utf-8"), Loader=yaml.FullLoader)
+        caction = yaml.load(open("resources/cbait_action.yaml", 'r', encoding="utf-8"), Loader=yaml.FullLoader)
+        cfinal = yaml.load(open("resources/cbait_final.yaml", 'r', encoding="utf-8"), Loader=yaml.FullLoader)
+
+        if (random.random() > 0.75):
+            # Template 1
+            person1 = random.choice(cperson)
+            person2 = random.choice(cperson)
+            final1 = random.choice(cfinal)
+            reply = ">>> " + person1 + " rencontre " + person2 + "! " + final1
+        else:
+            # Template 2
+            action1 = random.choice(caction)
+            object1 = random.choice(cobject)
+            final1 = random.choice(cfinal)
+            reply = ">>> Je " + action1 + " " + object1 + "! " + final1
+        return reply

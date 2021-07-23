@@ -60,6 +60,10 @@ async def on_message(message):
   elif message.content.lower().startswith('!#teddyvd'):
     await message.channel.send(client.vpbot.jcvd_generator())
 
+  # Random clickbait generator
+  elif message.content.lower().startswith('!#teddybait'):
+    await message.channel.send(client.vpbot.cbait_generator())
+
   # Play Shifumi with the vpbot
   elif message.content.lower().startswith('!#teddyshifumi'):
     await message.reply(client.vpbot.play_shifumi(message) , mention_author=True)
