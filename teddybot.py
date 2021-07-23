@@ -1,5 +1,6 @@
 import os
 import discord
+import platform
 
 from datetime import datetime
 import time
@@ -7,7 +8,10 @@ import random
 from dotenv import load_dotenv
 load_dotenv()
 
-from teddyActions import excuse_generator, heightball, shifumi, teddyvd_generator, teddygotchi
+from teddyActions import shifumi, teddygotchi
+
+from vpbot import VPBot
+
 
 client = discord.Client()
 
@@ -24,6 +28,7 @@ async def on_ready():
     """
     print("------------------------- START UP -------------------------")
     print(" * date: {}".format(datetime.now()))
+    print(" * python version: {}".format(platform.python_version()))
     print(" * discord.py version: {}".format(discord.__version__))
     print("------------------------------------------------------------")
     print(" * logged in as {0.user}:".format(client))
@@ -31,6 +36,9 @@ async def on_ready():
       print("   * {} ({} members)".format(
           guild.name,
           guild.member_count))
+    print("------------------------------------------------------------")
+    print(" * Initialize virtual pet ...")
+    client.vpbot = VPBot("Teddy")
     print("------------------------------------------------------------")
 
 @client.event
@@ -40,24 +48,20 @@ async def on_message(message):
   if message.author.id == client.user.id:
     return
 
-  if message.content.lower().startswith('!teddybot'):
-    excuse = excuse_generator()
-    print(message.author, message.author.name, message.author.id)
-    await message.reply(excuse, mention_author=True)
+  if message.content.lower().startswith('!#teddybot'):
+    await message.reply(client.vpbot.excuse_generator(), mention_author=True)
 
-  elif message.content.lower().startswith('!teddy8ball'):
-    answer = heightball(message)
-    await message.reply(answer, mention_author=True)
+  elif message.content.lower().startswith('!#teddy8ball'):
+    await message.reply(client.vpbot.heightball(message), mention_author=True)
 
-  elif message.content.lower().startswith('!teddyvd'):
-    reponse = teddyvd_generator()
-    await message.channel.send(reponse)
+  elif message.content.lower().startswith('!#teddyvd'):
+    await message.channel.send(client.vpbot.jcvd_generator())
 
-  elif message.content.lower().startswith('!teddyshifumi'):
+  elif message.content.lower().startswith('!#teddyshifumi'):
     reponse = shifumi(message)
     await message.reply(reponse, mention_author=True)
 
-  elif message.content.lower().startswith('!teddygotchi'):
+  elif message.content.lower().startswith('!#teddygotchi'):
     reponse = teddygotchi(message, client.hungrylvl, client.eattime)
     await message.reply(reponse, mention_author=True)
 
@@ -71,7 +75,7 @@ async def on_message(message):
     await message.channel.send(random.choice(replies))
 
 
-  elif message.content.lower().startswith('!teddystatus'): #message.content == "=displayembed":
+  elif message.content.lower().startswith('!#teddystatus'): #message.content == "=displayembed":
       status_description = ":small_blue_diamond: discord.py version: "+str(discord.__version__)+"\n"
       status_description += ":small_blue_diamond: Guild(s):\n"
       print(" * logged in as {0.user}:".format(client))
@@ -96,4 +100,4 @@ async def on_message(message):
 
       await message.channel.send(embed=embed)
 
-client.run(os.environ.get("TOKEN"))
+client.run(os.environ.get("TOKENDEV"))
