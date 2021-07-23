@@ -48,7 +48,7 @@ async def on_message(message):
   if message.content.lower().startswith('!teddybait'):
     excuse = cbait_generator()
     print(message.author, message.author.name, message.author.id)
-    await message.reply(excuse, mention_author=True)
+    await message.channel.send(excuse)
 
   elif message.content.lower().startswith('!teddy8ball'):
     answer = heightball(message)

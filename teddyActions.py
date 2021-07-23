@@ -12,7 +12,7 @@ def cbait_generator():
     caction = yaml.load(open("caction.yaml", 'r', encoding="utf-8"), Loader=yaml.FullLoader)
     cfinal = yaml.load(open("cfinal.yaml", 'r', encoding="utf-8"), Loader=yaml.FullLoader)
 
-    if(random.random() > 0.5):
+    if(random.random() > 0.75):
         # Template 1
         person1 = random.choice(cperson)
         person2 = random.choice(cperson)
