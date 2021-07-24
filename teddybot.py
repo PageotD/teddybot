@@ -98,5 +98,5 @@ async def on_message(message):
 
       await message.channel.send(embed=embed)
 
-client.run("TOKEN")
-#client.run(os.environ.get("TOKEN"))
+#client.run("TOKEN")
+client.run(os.environ.get("TOKEN"))
