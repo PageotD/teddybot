@@ -1,1 +1,1 @@
-web: python teddybot.py
+worker: python teddybot.py
