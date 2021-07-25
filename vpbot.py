@@ -1,6 +1,12 @@
 # Import modules
 import random
 import yaml
+from io import *
+from itertools import combinations
+from collections import defaultdict
+from time import time
+
+from collections import Counter
 
 class VPBot:
     """
@@ -14,7 +20,9 @@ class VPBot:
     # * fullness threshold and drop
     fullness_threshold = 50.
     fullness_drop = 25
-
+    wordsolutions = []
+    wordtrial = []
+    
     def __init__(self, name="Teddy"):
         # Virtual pet name
         self.vpname = name
@@ -209,3 +217,90 @@ class VPBot:
             final1 = random.choice(cfinal)
             reply = ">>> Je " + action1 + " " + object1 + "! " + final1
         return reply
+
+
+    def word_game(self, message):
+        msg = message.content.split()
+        with open('resources/wordlist_fr.txt', 'r') as dictword:
+            wordlist = dictword.readlines()
+            wordlist = [x.strip() for x in wordlist]
+
+        if len(msg) > 1 and msg[1].lower() == '!start':
+            print("IN START")
+            alphabet = ['a', 'e', 'i', 'o', 'u', 'y', 'b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'z']
+            voyelles = ['a', 'e', 'i', 'o', 'u', 'y']
+            check = False
+            while(check == False):
+
+                check_letters = False
+                while(check_letters == False):
+                    count_voyelles = 0
+                    self.wordtrial = []
+
+                    for i in range(0, 9):
+                        self.wordtrial.append(random.choice(alphabet))
+                        if self.wordtrial[-1] in voyelles:
+                            count_voyelles += 1
+                    if count_voyelles >= 2:
+                        check_letters = True
+
+                # Check if words exist
+                letters = Counter(self.wordtrial)
+                self.wordsolutions = []
+                solutions = [word for word in wordlist if not Counter(word) - letters]
+                if len(solutions) > 0:
+                    for i in range(len(solutions)):
+                        if(len(solutions[i]) > 4 and len(solutions[i]) < 9):
+                            self.wordsolutions.append(solutions[i])
+
+                if len(self.wordsolutions) > 2:
+                    check = True
+
+                print(self.wordsolutions)
+
+            # Create the return letters
+            reply = ''
+            for i in range(9):
+                reply += ':regional_indicator_'+self.wordtrial[i]+': '
+
+            return reply
+
+        elif len(msg) > 1 and  msg[1].lower() == '!stop':
+            print("IN STOP")
+            if self.wordsolutions:
+                # Create the return letters
+                reply = 'Les solutions pour:\n'
+                for i in range(9):
+                    reply += ':regional_indicator_' + self.wordtrial[i] + ': '
+                reply += '\n'
+                for i in range(len(self.wordsolutions)):
+                    reply += '- '+self.wordsolutions[i]+'\n'
+                self.wordtrial = []
+                self.wordsolutions = []
+                return reply
+            else:
+                self.wordtrial = []
+                self.wordsolutions = []
+            return "Aucun jeu en cours! Lancez `!teddymots !start` pour commencer!"
+
+        elif len(msg) > 1:
+            print("IN ELIF 1")
+            if(self.wordsolutions):
+                if(msg[1] in self.wordsolutions):
+                    return message.author.mention+" Oui :)"
+                else:
+                    return message.author.mention+"Non :("
+            else:
+                return "Aucun jeu en cours! Lancez `!teddymots !start` pour commencer!"
+
+        elif len(msg) == 1:
+            print("IN ELIF 2")
+            if (self.wordsolutions):
+                # Create the return letters
+                reply = ''
+                for i in range(9):
+                    reply += ':regional_indicator_' + self.wordtrial[i] + ': '
+
+                return reply
+            else:
+                return "Aucun jeu en cours! Lancez `!teddymots !start` pour commencer!"

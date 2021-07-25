@@ -7,7 +7,6 @@ import time
 import random
 from dotenv import load_dotenv
 load_dotenv()
-
 from teddyActions import teddygotchi
 
 from vpbot import VPBot
@@ -72,6 +71,10 @@ async def on_message(message):
   elif message.content.lower().startswith('!teddygotchi'):
     reponse = teddygotchi(message, client.hungrylvl, client.eattime)
     await message.reply(reponse, mention_author=True)
+
+  # Mot le plus long
+  elif message.content.lower().startswith('!teddymots'):
+    await message.channel.send(client.vpbot.word_game(message))
 
   elif message.content.lower().startswith('!teddystatus'): #message.content == "=displayembed":
       status_description = ":small_blue_diamond: discord.py version: "+str(discord.__version__)+"\n"
