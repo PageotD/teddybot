@@ -250,7 +250,7 @@ class VPBot:
                 solutions = [word for word in wordlist if not Counter(word) - letters]
                 if len(solutions) > 0:
                     for i in range(len(solutions)):
-                        if(len(solutions[i]) > 4 and len(solutions[i]) < 9):
+                        if(len(solutions[i]) > 2 and len(solutions[i]) < 9):
                             self.wordsolutions.append(solutions[i])
 
                 if len(self.wordsolutions) > 2:
