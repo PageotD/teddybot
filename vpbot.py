@@ -274,7 +274,7 @@ class VPBot:
                     reply += ':regional_indicator_' + self.wordtrial[i] + ': '
                 reply += '\n'
                 for i in range(len(self.wordsolutions)):
-                    reply += '- '+self.wordsolutions[i]+', '
+                    reply += self.wordsolutions[i]+', '
                 reply += '\n'
                 self.wordtrial = []
                 self.wordsolutions = []
