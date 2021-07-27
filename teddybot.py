@@ -85,9 +85,11 @@ async def on_message(message):
       teddystate = 6-int(client.life/20)
       client.life -= 10.
       embed = discord.Embed(title="Teddy Bot Status")
-      embed.set_thumbnail(url="https://img1.freepng.fr/20190207/grw/kisspng-eevee-pixel-art-image-eevee-pixel-art-maker-5c5ce3d3859cc0.9955544915495915075473.jpg")
+      if teddy.state == 1:
+        urlteddy="https://github.com/PageotD/teddybot/blob/develop/resources/teddy0"+str(teddystate)+".png"
+      embed.set_thumbnail(url=urlteddy)
       await message.channel.send(embed=embed)
-      
+
     #await message.reply(client.vpbot.heightball(message), mention_author=True)
 
   elif message.content.lower().startswith('!teddystatus'): #message.content == "=displayembed":
