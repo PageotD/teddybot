@@ -13,7 +13,7 @@ from vpbot import VPBot
 
 
 client = discord.Client()
-
+client.life = 100.
 client.hungrylvl = 100.
 client.eattime = time.time()
 
@@ -75,6 +75,20 @@ async def on_message(message):
   # Mot le plus long
   elif message.content.lower().startswith('!teddymots'):
     await message.channel.send(client.vpbot.word_game(message))
+
+  # Magic 8-Ball
+  elif message.content.lower().startswith('!teddypunch'):
+    msg = message.content.lower().split()
+    if msg > 1 and msg[1] == 'restart':
+      client.life = 100.
+    else:
+      teddystate = 6-int(client.life/20)
+      client.life -= 10.
+      embed = discord.Embed(title="Teddy Bot Status")
+      embed.set_thumbnail(url="https://img1.freepng.fr/20190207/grw/kisspng-eevee-pixel-art-image-eevee-pixel-art-maker-5c5ce3d3859cc0.9955544915495915075473.jpg")
+      await message.channel.send(embed=embed)
+      
+    #await message.reply(client.vpbot.heightball(message), mention_author=True)
 
   elif message.content.lower().startswith('!teddystatus'): #message.content == "=displayembed":
       status_description = ":small_blue_diamond: discord.py version: "+str(discord.__version__)+"\n"
