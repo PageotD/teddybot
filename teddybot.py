@@ -13,7 +13,7 @@ from vpbot import VPBot
 
 
 client = discord.Client()
-client.life = 100.
+client.life = 6
 client.hungrylvl = 100.
 client.eattime = time.time()
 
@@ -80,13 +80,12 @@ async def on_message(message):
   elif message.content.lower().startswith('!teddypunch'):
     msg = message.content.lower().split()
     if msg > 1 and msg[1] == 'restart':
-      client.life = 100.
+      client.life = 6
     else:
-      teddystate = 6-int(client.life/20)
-      client.life -= 10.
+      teddystate = 6-client.life
+      client.life -= 1
       embed = discord.Embed(title="Teddy Bot Status")
-      if teddy.state == 1:
-        urlteddy="https://github.com/PageotD/teddybot/blob/develop/resources/teddy0"+str(teddystate)+".png"
+      urlteddy="https://github.com/PageotD/teddybot/blob/develop/resources/teddy0"+str(teddystate)+".png"
       embed.set_thumbnail(url=urlteddy)
       await message.channel.send(embed=embed)
 
