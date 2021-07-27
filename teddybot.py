@@ -79,15 +79,19 @@ async def on_message(message):
   # Magic 8-Ball
   elif message.content.lower().startswith('!teddypunch'):
     msg = message.content.lower().split()
-    if msg > 1 and msg[1] == 'restart':
+    if len(msg) > 1 and msg[1] == 'restart':
       client.life = 6
+      teddystate = 5
     else:
       teddystate = 6-client.life
       client.life -= 1
-      embed = discord.Embed(title="Teddy Bot Status")
-      urlteddy="https://github.com/PageotD/teddybot/blob/develop/resources/teddy0"+str(teddystate)+".png"
-      embed.set_thumbnail(url=urlteddy)
-      await message.channel.send(embed=embed)
+      if teddystate < 1 :
+        teddystate = 1
+    embed = discord.Embed(title="Teddy Bot Status")
+    urlteddy="https://raw.githubusercontent.com/PageotD/teddybot/develop/resources/teddy0"+str(teddystate)+".png"
+    #urlteddy="https://github.com/PageotD/teddybot/blob/develop/resources/teddy0"+str(teddystate)+".png"
+    embed.set_thumbnail(url=urlteddy)
+    await message.channel.send(embed=embed)
 
     #await message.reply(client.vpbot.heightball(message), mention_author=True)
 
