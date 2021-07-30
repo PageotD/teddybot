@@ -59,8 +59,8 @@ class VPBot:
         for i in range(0, 3):#:5): #len(news_feed.entries)):
             #if i == (len(news_feed.entries)-1):
             if i < len(news_feed.entries)-1:
-                print("Alert: {} \nLink: {}".format(news_feed.entries[i]['title'], news_feed.entries[i]['id']))
-                reply += "**[{}]({})**\n".format(news_feed.entries[i]['title'],news_feed.entries[i]['id'])
+                print("Alert: {} \nLink: {}".format(news_feed.entries[i]['title'], news_feed.entries[i]['link']))
+                reply += "**[{}]({})**\n".format(news_feed.entries[i]['title'],news_feed.entries[i]['link'])
                 #reply += "[Link]({})".format(news_feed.entries[0]['id'])
                 reply += "_{}_\n".format(news_feed.entries[i].published)
                 reply += "{}\n".format(" ".join(md(news_feed.entries[i]['summary']).split()))
