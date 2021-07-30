@@ -48,7 +48,7 @@ async def on_message(message):
 
   if message.content.lower().startswith('!dzone'):
     reply = client.vpbot.rssfeed()
-    embed = discord.Embed(title="DZone RSS", description=reply, colour=discord.Colour.blue())
+    embed = discord.Embed(title="DZone Last Publications", description=reply, colour=discord.Colour.blue())
     #embed.set_thumbnail(url="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Generic_Feed-icon.svg/240px-Generic_Feed-icon.svg.png")
     await message.channel.send(embed=embed)
 

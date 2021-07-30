@@ -5,7 +5,7 @@ from io import *
 from itertools import combinations
 from collections import defaultdict
 from time import time
-
+from markdownify import markdownify as md
 from collections import Counter
 import feedparser
 
@@ -34,7 +34,7 @@ class VPBot:
     def rssfeed(self):
 
         # Création d'une instance
-        news_feed = feedparser.parse('http://feeds.dzone.com/home')
+        news_feed = feedparser.parse('http://feeds.dzone.com/publications')
 
         # Propriétés du flux
         #print(news_feed.feed.keys())
@@ -56,12 +56,17 @@ class VPBot:
     
         # Récupération du deernier feed (dernier bulletin CERT-FR)
         reply = "\n"
-        for i in range(0, 5): #len(news_feed.entries)):
+        for i in range(0, 3):#:5): #len(news_feed.entries)):
             #if i == (len(news_feed.entries)-1):
             if i < len(news_feed.entries)-1:
-                print("Alert: {} \nLink: {}".format(news_feed.entries[i]['title'], news_feed.entries[0]['id']))
-                reply += ":small_blue_diamond: [{}]({})\n\n".format(news_feed.entries[i]['title'],news_feed.entries[i]['id'])
+                print("Alert: {} \nLink: {}".format(news_feed.entries[i]['title'], news_feed.entries[i]['id']))
+                reply += "**[{}]({})**\n".format(news_feed.entries[i]['title'],news_feed.entries[i]['id'])
                 #reply += "[Link]({})".format(news_feed.entries[0]['id'])
+                reply += "_{}_\n".format(news_feed.entries[i].published)
+                reply += "{}\n".format(" ".join(md(news_feed.entries[i]['summary']).split()))
+                #reply += "[Link]({})".format(news_feed.entries[0]['id'])
+                reply += "\n"
+                print(reply)
         return reply
 
     def _mood(self):
