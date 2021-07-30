@@ -7,6 +7,7 @@ from collections import defaultdict
 from time import time
 
 from collections import Counter
+import feedparser
 
 class VPBot:
     """
@@ -29,6 +30,39 @@ class VPBot:
         # Set happiness and fullness
         self.happiness = 100.
         self.fullness = 100.
+
+    def rssfeed(self):
+
+        # Création d'une instance
+        news_feed = feedparser.parse('http://feeds.dzone.com/home')
+
+        # Propriétés du flux
+        #print(news_feed.feed.keys())
+
+        # Titre du flux
+        #print("Feed Title:", news_feed.feed.title) 
+
+        # Sous-titre du flux
+        #print("Feed Subtitle:", news_feed.feed.subtitle)
+
+        # Lien du flux
+        #print("Feed Link:", news_feed.feed.link, "\n")
+
+        # Propriétés de chaque item du flux
+        #print(news_feed.entries[0].keys())
+
+        #for entry in news_feed.entries:
+        #    print(f"{entry.title} --> {entry.link}")
+    
+        # Récupération du deernier feed (dernier bulletin CERT-FR)
+        reply = "\n"
+        for i in range(0, 5): #len(news_feed.entries)):
+            #if i == (len(news_feed.entries)-1):
+            if i < len(news_feed.entries)-1:
+                print("Alert: {} \nLink: {}".format(news_feed.entries[i]['title'], news_feed.entries[0]['id']))
+                reply += ":small_blue_diamond: [{}]({})\n\n".format(news_feed.entries[i]['title'],news_feed.entries[i]['id'])
+                #reply += "[Link]({})".format(news_feed.entries[0]['id'])
+        return reply
 
     def _mood(self):
         """
